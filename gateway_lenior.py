@@ -7,7 +7,7 @@ from typing import Optional
 
 app = FastAPI(title="Gateway Lenior", version="1.0")
 
-LENIOR_API = "https://lenior-api-1-hvvj.onrender.com"
+LENIOR_API = "https://novo-lenior.onrender.com"
 
 class Mensagem(BaseModel):
     texto: str
