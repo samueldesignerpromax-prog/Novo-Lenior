@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class LeniorClient {
 
-    private static final String API_BASE = "https://lenior-api-1-hvvj.onrender.com";
+    private static final String API_BASE = "https://novo-lenior.onrender.com";
     private static final String TEXT_ENDPOINT = API_BASE + "/chat/texto";
     private static String sessaoId = null;
 
