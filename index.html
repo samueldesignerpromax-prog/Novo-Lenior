@@ -436,7 +436,6 @@
 
             function limparChat() {
                 chatBox.innerHTML = '';
-                // mensagem de boas-vindas
                 adicionarMensagem('Lenior', 'Olá Samuel! Sou a Lenior 2.0. Como posso ajudar você hoje?', null);
             }
 
@@ -544,7 +543,6 @@
                             isRecording = false;
                             micBtn.style.display = 'inline-flex';
                             stopBtn.style.display = 'none';
-                            // libera a stream
                             stream.getTracks().forEach(t => t.stop());
                         };
                         mediaRecorder.start();
@@ -595,7 +593,6 @@
             // ===== INICIALIZAÇÃO =====
 
             function init() {
-                // verifica se a API está no ar
                 fetch(API_BASE)
                     .then((r) => {
                         if (r.ok) {
@@ -611,8 +608,6 @@
                 }
 
                 limparChat();
-
-                // atalho: foco no input
                 msgInput.focus();
             }
 
