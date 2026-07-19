@@ -1,22 +1,11 @@
 #!/usr/bin/env python3
-"""
-lenior_client.py — Cliente Python para a API Lenior 2.0
-Uso: python lenior_client.py "sua pergunta aqui"
-"""
-
-import requests
-import json
-import sys
-import os
-import base64
+import requests, json, sys, os, base64
 from pathlib import Path
 
-# ===== CONFIGURAÇÃO =====
-API_BASE = "https://lenior-api-1-hvvj.onrender.com"
+API_BASE = "https://novo-lenior.onrender.com"   # <-- NOVO
 TEXT_ENDPOINT = f"{API_BASE}/chat/texto"
 AUDIO_ENDPOINT = f"{API_BASE}/chat/audio"
 
-# ===== SESSÃO (persistente) =====
 SESSION_FILE = Path.home() / ".lenior_session"
 
 def carregar_sessao():
@@ -29,20 +18,15 @@ def salvar_sessao(sessao_id):
     with open(SESSION_FILE, "w") as f:
         f.write(sessao_id)
 
-# ===== FUNÇÕES =====
-
 def perguntar_texto(pergunta, sessao_id=None):
-    """Envia uma pergunta de texto e retorna a resposta."""
     payload = {"texto": pergunta}
     if sessao_id:
         payload["sessao_id"] = sessao_id
-
     resp = requests.post(TEXT_ENDPOINT, json=payload)
     resp.raise_for_status()
     return resp.json()
 
 def perguntar_audio(caminho_audio, sessao_id=None):
-    """Envia um arquivo de áudio e retorna a resposta."""
     with open(caminho_audio, "rb") as f:
         files = {"audio": (os.path.basename(caminho_audio), f, "audio/mp3")}
         data = {}
@@ -53,7 +37,6 @@ def perguntar_audio(caminho_audio, sessao_id=None):
         return resp.json()
 
 def salvar_audio_base64(base64_str, nome_saida="resposta_audio.wav"):
-    """Salva o áudio retornado em base64 para um arquivo."""
     if not base64_str:
         print("⚠️ Nenhum áudio retornado.")
         return
@@ -62,11 +45,8 @@ def salvar_audio_base64(base64_str, nome_saida="resposta_audio.wav"):
         f.write(audio_bytes)
     print(f"✅ Áudio salvo em: {nome_saida}")
 
-# ===== MAIN =====
-
 def main():
     sessao_id = carregar_sessao()
-
     if len(sys.argv) > 1:
         pergunta = " ".join(sys.argv[1:])
         print(f"🧠 Você: {pergunta}")
@@ -83,7 +63,6 @@ def main():
             print(f"❌ Erro: {e}")
         return
 
-    # Modo interativo
     print("🧠 Lenior 2.0 — Cliente Python")
     print("Digite 'sair' para encerrar.\n")
     while True:
@@ -97,7 +76,6 @@ def main():
             break
         if not pergunta:
             continue
-
         try:
             data = perguntar_texto(pergunta, sessao_id)
             if data.get("sessao_id"):
