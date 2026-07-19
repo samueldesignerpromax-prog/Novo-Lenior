@@ -6,7 +6,8 @@ require 'net/http'
 require 'json'
 require 'base64'
 
-API_URL = 'https://lenior-api-1-hvvj.onrender.com/chat/texto'
+API_URL = 'https://novo-lenior.onrender.com/chat/texto'
+# ... resto igual
 
 pergunta = ARGV[0] || 'Olá'
 
