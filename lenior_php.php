@@ -3,7 +3,9 @@
 // Uso: php lenior_php.php "sua pergunta"
 // Ou via web: ?q=sua+pergunta
 
-$api_url = "https://lenior-api-1-hvvj.onrender.com/chat/texto";
+<?php
+$api_url = "https://novo-lenior.onrender.com/chat/texto";
+// ... resto igual
 
 // Pega a pergunta da linha de comando ou GET
 if (php_sapi_name() === 'cli') {
